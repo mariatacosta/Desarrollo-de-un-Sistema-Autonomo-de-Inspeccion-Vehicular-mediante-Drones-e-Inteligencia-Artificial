@@ -24,16 +24,16 @@ print("Batería:", dron.get_battery(), "%")
 dron.streamoff()
 dron.streamon()
 time.sleep(2)
-
-while True:
-    img = dron.get_frame_read().frame
-    img = cv2.resize(img, (640, 480))
-    cv2.imshow("Imagen", img)
-    # waitKey: delay between every frame
-    #si presionamos q se para el programa
-    if cv2.waitKey(5) & 0xFF == ord('q'):
-        dron.streamoff()
-        break
+#
+# while True:
+#     img = dron.get_frame_read().frame
+#     img = cv2.resize(img, (640, 480))
+#     cv2.imshow("Imagen", img)
+#     # waitKey: delay between every frame
+#     #si presionamos q se para el programa
+#     if cv2.waitKey(5) & 0xFF == ord('q'):
+#         dron.streamoff()
+#         break
 
 def guardar_datos(timestamp, acc, gyro, pos_x, pos_y):
     """Guarda los datos en un archivo CSV"""
