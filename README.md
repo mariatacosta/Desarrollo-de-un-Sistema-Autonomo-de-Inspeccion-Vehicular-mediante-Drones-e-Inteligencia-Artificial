@@ -84,10 +84,13 @@ Generación de vídeos experimentales y recolección de métricas durante vuelos
 ## 📷 Representación visual
 
 - **Esquema general del sistema autónomo**  
-  ![Diagrama del flujo del sistema](assets/esquema%20intro.jpeg)
 
-- **Capturas reales del vuelo autónomo**  
-  ![Ejemplo de vuelo y seguimiento del objeto](assets/det_0028.jpg)
+  <img src="assets/esquema%20intro.jpeg" alt="Esquema intro" width="500"/>
+
+
+- **Captura real del vuelo autónomo**  
+    <img src="assets/det_0028.jpg" alt="Esquema intro" width="500"/>
+
 
 ---
 
@@ -100,6 +103,6 @@ Toda la experimentación ha sido realizada con hardware accesible y código modu
 
 ## 📫 Contacto
 
-Desarrollado por María [Apellido],  
-Trabajo de Fin de Grado en Ingeniería de Datos,  
-Universidad [Nombre], 2025.
+Desarrollado por María Torres,  
+Trabajo de Fin de Grado en Ingeniería y Sistemas de Datos,  
+Universidad Politécnica de Madrid, 2025.
