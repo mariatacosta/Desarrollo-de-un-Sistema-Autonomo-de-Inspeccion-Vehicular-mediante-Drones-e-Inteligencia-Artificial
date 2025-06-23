@@ -46,9 +46,9 @@ Aplicación de modelos entrenados para la **detección de partes del coche** y *
 - `depth_maps/`: Estimaciones de profundidad por MiDaS
 - `detections/`: Detección de partes y desperfectos
 - `models_detections/`: Detecciones organizadas por modelo
-- detection_metrics.csv: Métricas de las detecciones de los modelos
-- metrics.csv: Métricas del vuelo
-- informe_final.pdf: Informe final generado automáticamente en base a los datos capturados
+- `detection_metrics.csv`: Métricas de las detecciones de los modelos
+- `metrics.csv`: Métricas del vuelo
+- `informe_final.pdf`: Informe final generado automáticamente en base a los datos capturados
 
 > Este es el resultado consolidado del proyecto, empleado para evaluar el sistema en condiciones reales.
 
