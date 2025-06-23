@@ -1,99 +1,97 @@
 # Proyecto de Inspección Autónoma de Vehículos con Dron
 
-Este repositorio contiene el desarrollo completo de un sistema autónomo para la inspección de daños en vehículos mediante un dron DJI Tello, apoyado únicamente en una cámara monocular y técnicas de visión por computador e inteligencia artificial.
-
-El objetivo principal es realizar un vuelo orbital autónomo alrededor de un coche, manteniendo su centrado y distancia constante mediante segmentación semántica (YOLOv8-seg) y estimación de profundidad (MiDaS), para finalmente detectar partes y desperfectos en el vehículo e integrar los resultados en un informe pericial automático.
+Este repositorio contiene el desarrollo completo de un sistema autónomo para la inspección de daños en vehículos mediante un dron DJI Tello. El sistema se basa exclusivamente en visión por computador utilizando una única cámara monocular, integrando modelos de detección, segmentación y estimación de profundidad para navegar y analizar un vehículo de forma completamente autónoma.
 
 ---
 
 ## 📁 Estructura del repositorio
 
-Cada carpeta corresponde a una fase o experimento individual del desarrollo del proyecto:
+Cada carpeta representa una fase independiente del desarrollo del sistema. Se ha seguido una progresión modular para implementar y validar los distintos componentes antes de integrarlos en una versión final.
 
 ### `1.inicio/`
-Primeras pruebas de detección y segmentación de objetos con el dron en vuelo estático. Incluye:
+Primera fase experimental. El dron se mantiene estático mientras se prueba la detección de objetos y se evalúan los resultados básicos:
 - `frames/`: Imágenes capturadas
-- `masks/`: Segmentaciones
-- `detections/`: Resultados de detección
+- `masks/`: Segmentaciones generadas
+- `detections/`: Detecciones en bruto
 
 ---
 
 ### `2.movement/`
-Implementación del movimiento lateral del dron, manteniendo el objeto centrado en el encuadre. Incluye resultados similares al anterior.
+Implementación del movimiento lateral autónomo del dron, manteniendo el objeto centrado mediante segmentación semántica:
+- Se prueban ajustes suaves de orientación y traslación
+- Estructura similar para guardar `frames/`, `masks/` y `detections/`
 
 ---
 
 ### `3.MiDaS/`
-Implementación del modelo MiDaS para estimar profundidad a partir de una imagen monocular:
-- `3.1.depth_estimation/`: Resultados experimentales ordenados por fecha
-- `3.2.Midas_Extra/`: Utilidades y pruebas adicionales
-- Carpetas globales para `depth_maps`, `frames`, `masks` y `detections`
+Integración del modelo **MiDaS** para estimar la distancia al objeto mediante profundidad monocular:
+- `depth_maps/`: Mapas de profundidad generados
+- Se utiliza la media de profundidad en la segmentación para ajustar la distancia del dron
+- Estructura común: `frames/`, `masks/`, `detections/`
 
 ---
 
 ### `4.Detections/`
-Aplicación de modelos entrenados para la **detección de partes** y **desperfectos** sobre las segmentaciones del coche:
-- `models_detections/`: Resultados por modelo (YOLOv8n, YOLOv8n-seg...)
-- `frames/`, `masks/`, `detections/`, `depth_maps/`: Resultados organizados
+Aplicación de modelos entrenados para la **detección de partes del coche** y **desperfectos** sobre las segmentaciones:
+- `models_detections/`: Resultados por modelo (YOLOv8n, etc.)
+- Organización por tipo de datos: `frames/`, `masks/`, `detections/`, `depth_maps/`
 
 ---
 
-### `5.InformeFinal/`, `5.3.InformeFinal/`, etc.
-Generación automatizada del informe pericial con todas las métricas e imágenes relevantes. Contiene:
-- `5.1.informes/`: Resultados ordenados por tipo
-- `frames/`, `masks/`, `depth_maps/`, `detections/`: Datos para el informe
-- `models_detections/`: Resultados con detecciones específicas para el informe final
+### `5.3.InformeFinal/` 🟢 **VERSIÓN FINAL DEL PROYECTO**
+**Esta carpeta contiene la implementación final del sistema**, utilizada para ejecutar el experimento completo en un entorno controlado real. Integra todos los módulos anteriores en un único flujo automatizado:
 
-> Existen varias versiones (`- copia`, `5.2`, `5.3`) debido a iteraciones y mejoras del sistema.
+- `frames/`: Capturas clave durante el vuelo
+- `masks/`: Segmentaciones generadas en tiempo real
+- `depth_maps/`: Estimaciones de profundidad por MiDaS
+- `detections/`: Detección de partes y desperfectos
+- `models_detections/`: Detecciones organizadas por modelo
+- detection_metrics.csv: Métricas de las detecciones de los modelos
+- metrics.csv: Métricas del vuelo
+- informe_final.pdf: Informe final generado automáticamente en base a los datos capturados
 
----
-
-### Otras carpetas auxiliares
-- `capturas_originales/`: Frames sin procesar
-- `profundidades_midas/`: Exportaciones manuales de mapas de profundidad
-
----
-
-## 🔧 Tecnologías y modelos utilizados
-
-- **Dron**: DJI Tello
-- **Visión por computador**: OpenCV
-- **Detección y segmentación**: YOLOv8n y YOLOv8n-seg (Ultralytics)
-- **Estimación de profundidad**: MiDaS (torchvision + timm)
-- **Procesamiento**: Python, Pandas, PIL
-- **Visualización y PDF**: FPDF, OpenCV
-- **Entrenamiento de modelos**: PyTorch y Ultralytics
+> Este es el resultado consolidado del proyecto, empleado para evaluar el sistema en condiciones reales.
 
 ---
 
-## 📑 Resultados
+## 🔧 Tecnologías empleadas
 
-El sistema permite realizar de forma autónoma:
-- La detección y seguimiento del vehículo en vuelo
-- La estimación de profundidad para mantener la distancia al objeto
-- La detección de partes y desperfectos del coche
-- La generación de un informe final estructurado con métricas y capturas clave
-
----
-
-## 📷 Ejemplos visuales
-
-Se pueden reutilizar las imágenes incluidas en la memoria del proyecto para representar:
-- El pipeline completo del sistema
-- Ejemplos de detecciones correctas y fallidas
-- Comparativa entre profundidad estimada y real
+- **Dron**: DJI Tello (controlado mediante `djitellopy`)
+- **Modelos de IA**:
+  - YOLOv8n-seg (segmentación semántica)
+  - YOLOv8n (detección de partes/desperfectos)
+  - MiDaS (estimación de profundidad monocular)
+- **Frameworks**: PyTorch, OpenCV, PIL, Pandas, FPDF
 
 ---
 
-## 📌 Nota
+## 📑 Objetivo del sistema
 
-Este repositorio refleja un proyecto académico y ha sido estructurado para recoger las distintas fases experimentales del desarrollo. La organización por carpetas busca documentar y separar claramente cada etapa sin sobreescribir resultados previos.
+- Identificación automática del coche mediante segmentación
+- Seguimiento del objeto con corrección de trayectoria y ajuste de distancia
+- Aplicación localizada de modelos de detección de partes y daños
+- Generación automatizada de un informe visual y cuantitativo
+
+---
+
+## 📷 Representación visual
+
+Puedes reutilizar los esquemas incluidos en la memoria del TFG para ilustrar:
+- El flujo del sistema completo
+- Ejemplos de vuelo real y resultados visuales
+- Comparativas entre detecciones correctas e incorrectas
+
+---
+
+## 📌 Notas finales
+
+Este repositorio representa un **proyecto académico de carácter experimental**, con un enfoque progresivo en la implementación de módulos individuales antes de su consolidación.  
+Toda la experimentación ha sido realizada con hardware accesible y código modular, con el objetivo de facilitar futuras extensiones o aplicaciones industriales.
 
 ---
 
 ## 📫 Contacto
 
-Proyecto desarrollado por María Torres como parte del Trabajo de Fin de Grado en Ingeniería y Sistemas de Datos.  
-Universidad Politécnica de Madrid, 2025.
-
-
+Desarrollado por María [Apellido],  
+Trabajo de Fin de Grado en Ingeniería de Datos,  
+Universidad [Nombre], 2025.
