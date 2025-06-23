@@ -87,7 +87,7 @@ Generación de vídeos experimentales y recolección de métricas durante vuelos
   ![Diagrama del flujo del sistema](assets/esquema intro.png)
 
 - **Capturas reales del vuelo autónomo**  
-  ![Ejemplo de vuelo y seguimiento del objeto](assets/det_0028.png)
+  ![Ejemplo de vuelo y seguimiento del objeto](assets/det_0028.jpg)
 
 ---
 
