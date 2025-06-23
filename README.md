@@ -84,7 +84,7 @@ Generación de vídeos experimentales y recolección de métricas durante vuelos
 ## 📷 Representación visual
 
 - **Esquema general del sistema autónomo**  
-  ![Diagrama del flujo del sistema](assets/esquema intro.png)
+  ![Diagrama del flujo del sistema](assets/esquema%20intro.jpeg)
 
 - **Capturas reales del vuelo autónomo**  
   ![Ejemplo de vuelo y seguimiento del objeto](assets/det_0028.jpg)
